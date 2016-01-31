@@ -1,4 +1,4 @@
-﻿namespace serwer1
+﻿namespace klient
 {
     partial class Form1
     {
@@ -36,6 +36,9 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_port3 = new System.Windows.Forms.TextBox();
+            this.textBox_port2 = new System.Windows.Forms.TextBox();
+            this.textBox_port1 = new System.Windows.Forms.TextBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
@@ -69,7 +72,7 @@
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(315, 301);
+            this.textBox2.Size = new System.Drawing.Size(446, 335);
             this.textBox2.TabIndex = 2;
             // 
             // button2
@@ -117,15 +120,39 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_port3);
+            this.groupBox1.Controls.Add(this.textBox_port2);
+            this.groupBox1.Controls.Add(this.textBox_port1);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Location = new System.Drawing.Point(11, 7);
+            this.groupBox1.Location = new System.Drawing.Point(11, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(170, 101);
+            this.groupBox1.Size = new System.Drawing.Size(171, 101);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Wybór serwera";
+            this.groupBox1.Text = "Wybór serwera - port";
+            // 
+            // textBox_port3
+            // 
+            this.textBox_port3.Location = new System.Drawing.Point(96, 73);
+            this.textBox_port3.Name = "textBox_port3";
+            this.textBox_port3.Size = new System.Drawing.Size(62, 22);
+            this.textBox_port3.TabIndex = 11;
+            // 
+            // textBox_port2
+            // 
+            this.textBox_port2.Location = new System.Drawing.Point(96, 45);
+            this.textBox_port2.Name = "textBox_port2";
+            this.textBox_port2.Size = new System.Drawing.Size(62, 22);
+            this.textBox_port2.TabIndex = 11;
+            // 
+            // textBox_port1
+            // 
+            this.textBox_port1.Location = new System.Drawing.Point(96, 17);
+            this.textBox_port1.Name = "textBox_port1";
+            this.textBox_port1.Size = new System.Drawing.Size(62, 22);
+            this.textBox_port1.TabIndex = 10;
             // 
             // trackBar1
             // 
@@ -154,7 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 319);
+            this.ClientSize = new System.Drawing.Size(640, 352);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
@@ -186,6 +213,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBox_port3;
+        private System.Windows.Forms.TextBox textBox_port2;
+        private System.Windows.Forms.TextBox textBox_port1;
     }
 }
 
