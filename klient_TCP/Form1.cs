@@ -16,16 +16,27 @@ namespace klient
     public partial class Form1 : Form
     {
         string ch_1, ch_2, ch_3;
-        int port1 = 1200;
+        int[] port_serwera = new int[3];
+        string[] ip_serwera = new string[3];
+        int[] czas_Tc = new int[3];
+        bool serwer1, serwer2, serwer3;
 
         TcpListener listen1 = new TcpListener(IPAddress.Any, 1200);
         TcpListener listen2 = new TcpListener(IPAddress.Any, 1201);
         TcpListener listen3 = new TcpListener(IPAddress.Any, 1202);
 
-
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //żeby od startu pokazywała się dobra wartość czasu nastawionego
+            label8.Text = trackBar1.Value.ToString();
+            label9.Text = trackBar2.Value.ToString();
+            label11.Text = trackBar3.Value.ToString();
+
 
             Thread watek1 = new Thread(funkcja_odbieraj);
             Thread watek2 = new Thread(watek_glowny);
@@ -36,7 +47,7 @@ namespace klient
 
             watek1.Start();
             watek1.Priority = ThreadPriority.Highest;
-            watek2.Start();     
+            watek2.Start(); 
         }
 
         private delegate void wyswietl_del();
@@ -88,7 +99,7 @@ namespace klient
                     }
             }
         }
-        bool serwer1, serwer2, serwer3;
+
         private void watek_glowny()
         {
             while (true)
@@ -172,22 +183,40 @@ namespace klient
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            textBox1.Text = trackBar1.Value.ToString();
+            label8.Text = trackBar1.Value.ToString();
+            //dodać wartość->timer-------------------------
+        }
+
+        private void trackBar2_ValueChanged(object sender, EventArgs e)
+        {
+            label9.Text = trackBar2.Value.ToString();
+            //dodać wartość->timer-------------------------
+        }
+
+        private void trackBar3_ValueChanged(object sender, EventArgs e)
+        {
+            label11.Text = trackBar3.Value.ToString();
+            //dodać wartość->timer-------------------------
         }
 
         // koncepcja wyszukiwania serwerów
-        static bool a = false;
+        static bool START_STOP = false;
         private void button1_Click(object sender, EventArgs e)
         {
-            // można dodać coś, co wykonuje się bistabilnie
-            a ^= true;
-            if(a == true)
+            if (START_STOP)
             {
-                MessageBox.Show(a.ToString());
+                START_STOP = false;
+                button1.Text = "START";
+                //client.Close();   
             }
             else
             {
-                MessageBox.Show(a.ToString());
+                START_STOP = true;
+                button1.Text = "STOP";
+                //różne ustawienia po wystartowaniu
+               // ip_klienta = textBox7.Text;
+               // port_klienta = Int32.Parse(textBox8.Text);
+               // timer1.Interval = Int32.Parse(textBox9.Text);
             }
         }
 
@@ -195,5 +224,13 @@ namespace klient
         {
             MessageBox.Show("Pierwsza zasrana zmiana z Gitem");
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
     }
 }
