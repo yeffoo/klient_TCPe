@@ -53,7 +53,7 @@ namespace serwer1
                         client.Close();
                     }
 
-                //Thread.Sleep(5000);
+                    //Thread.Sleep(5000);
 
                     catch (SocketException se)
                     {
@@ -129,7 +129,7 @@ namespace serwer1
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Pierwsza zasrana zmiana z Gitem");
         }
     }
 }
