@@ -69,7 +69,7 @@ namespace klient
                         ch_2 = Encoding.Unicode.GetString(buffer, 0, data_2);
                     //
                     //                      3
-                        TcpClient client_3 = listen3.AcceptTcpClient();
+                        TcpClient client_3 = listen3.AcceptTcpClient(); 
                         client_2.ReceiveTimeout = 1000;
                         NetworkStream stream_3 = client_3.GetStream();
                         this.BeginInvoke(new wyswietl_del(funkcja2));
