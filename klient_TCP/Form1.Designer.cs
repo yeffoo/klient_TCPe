@@ -162,9 +162,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(10, 56);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(122, 13);
+            this.label7.Size = new System.Drawing.Size(116, 13);
             this.label7.TabIndex = 14;
-            this.label7.Text = "Czas Tc 100 - 1000 [ms]";
+            this.label7.Text = "Czas Tc 10 - 1000 [ms]";
             // 
             // trackBar1
             // 
@@ -172,15 +172,16 @@
             this.trackBar1.Location = new System.Drawing.Point(146, 45);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(2);
             this.trackBar1.Maximum = 1000;
-            this.trackBar1.Minimum = 100;
+            this.trackBar1.Minimum = 10;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(118, 45);
             this.trackBar1.TabIndex = 8;
-            this.trackBar1.Value = 500;
+            this.trackBar1.Value = 200;
             this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
             // textBox3
             // 
+            this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(97, 18);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
@@ -207,6 +208,7 @@
             // 
             // textBox_port1
             // 
+            this.textBox_port1.Enabled = false;
             this.textBox_port1.Location = new System.Drawing.Point(235, 18);
             this.textBox_port1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_port1.Name = "textBox_port1";
@@ -216,6 +218,7 @@
             // 
             // textBox_port3
             // 
+            this.textBox_port3.Enabled = false;
             this.textBox_port3.Location = new System.Drawing.Point(235, 19);
             this.textBox_port3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_port3.Name = "textBox_port3";
@@ -225,6 +228,7 @@
             // 
             // textBox_port2
             // 
+            this.textBox_port2.Enabled = false;
             this.textBox_port2.Location = new System.Drawing.Point(235, 16);
             this.textBox_port2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_port2.Name = "textBox_port2";
@@ -263,9 +267,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(10, 61);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(122, 13);
+            this.label10.Size = new System.Drawing.Size(116, 13);
             this.label10.TabIndex = 18;
-            this.label10.Text = "Czas Tc 100 - 1000 [ms]";
+            this.label10.Text = "Czas Tc 10 - 1000 [ms]";
             // 
             // trackBar2
             // 
@@ -273,15 +277,16 @@
             this.trackBar2.Location = new System.Drawing.Point(146, 50);
             this.trackBar2.Margin = new System.Windows.Forms.Padding(2);
             this.trackBar2.Maximum = 1000;
-            this.trackBar2.Minimum = 100;
+            this.trackBar2.Minimum = 10;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(118, 45);
             this.trackBar2.TabIndex = 17;
-            this.trackBar2.Value = 500;
+            this.trackBar2.Value = 200;
             this.trackBar2.ValueChanged += new System.EventHandler(this.trackBar2_ValueChanged);
             // 
             // textBox4
             // 
+            this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(97, 16);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 20);
@@ -336,9 +341,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(10, 66);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(122, 13);
+            this.label12.Size = new System.Drawing.Size(116, 13);
             this.label12.TabIndex = 18;
-            this.label12.Text = "Czas Tc 100 - 1000 [ms]";
+            this.label12.Text = "Czas Tc 10 - 1000 [ms]";
             // 
             // trackBar3
             // 
@@ -346,15 +351,16 @@
             this.trackBar3.Location = new System.Drawing.Point(146, 55);
             this.trackBar3.Margin = new System.Windows.Forms.Padding(2);
             this.trackBar3.Maximum = 1000;
-            this.trackBar3.Minimum = 100;
+            this.trackBar3.Minimum = 10;
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Size = new System.Drawing.Size(118, 45);
             this.trackBar3.TabIndex = 17;
-            this.trackBar3.Value = 500;
+            this.trackBar3.Value = 200;
             this.trackBar3.ValueChanged += new System.EventHandler(this.trackBar3_ValueChanged);
             // 
             // textBox5
             // 
+            this.textBox5.Enabled = false;
             this.textBox5.Location = new System.Drawing.Point(97, 19);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 20);
@@ -422,6 +428,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Klient TCP/IP";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.przed_zamknieciem_Formsa);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -468,11 +475,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TrackBar trackBar3;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
