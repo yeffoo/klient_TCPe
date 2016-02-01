@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace klient
 {
@@ -20,6 +21,10 @@ namespace klient
         string[] ip_serwera = new string[3];
         int[] czas_Tc = new int[3];
         bool serwer1, serwer2, serwer3;
+        string[] odebrane_dane1 = new string[30]; //[dane(x, y, host, ip, czas)]
+        string[] odebrane_dane2 = new string[30]; //[dane(x, y, host, ip, czas)]
+        string[] odebrane_dane3 = new string[30]; //[dane(x, y, host, ip, czas)]
+        int[,,] xy = new int[3,2,30];   //[serwer],[0=x;1=y],[dane_historyczne]
 
         TcpListener listen1;
         TcpListener listen2;
@@ -189,6 +194,7 @@ namespace klient
                 timer1.Enabled = false;
                 timer2.Enabled = false;
                 timer3.Enabled = false;
+                timer4.Enabled = false;
                
                 //Thread.Sleep(5000);
                 //stream_1.Close();
@@ -221,7 +227,8 @@ namespace klient
                 timer3.Interval = trackBar3.Value;
                 timer1.Enabled = serwer1;
                 timer2.Enabled = serwer2;
-                timer3.Enabled = serwer3;   
+                timer3.Enabled = serwer3;
+                timer4.Enabled = true;  
             }
         }
 
@@ -275,7 +282,7 @@ namespace klient
         {
                 serwer3 = checkBox3.Checked;
                 textBox_port3.Enabled = checkBox3.Checked;
-                textBox4.Enabled = checkBox3.Checked;
+                textBox5.Enabled = checkBox3.Checked;
         }
 
         private void przed_zamknieciem_Formsa(object sender, FormClosingEventArgs e)
@@ -287,6 +294,96 @@ namespace klient
             listen1.Stop();
             listen2.Stop();
             listen3.Stop(); 
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            //dane serwer1
+            if (!(ch_1 == null))
+            {
+                ch_1.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                odebrane_dane1 = ch_1.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            //dane serwer2
+            if (!(ch_2 == null))
+            {
+                ch_2.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                odebrane_dane2 = ch_2.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            //dane serwer3
+            if (!(ch_3 == null))
+            {
+                ch_3.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                odebrane_dane3 = ch_3.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            
+            for (int i = 29; i > 0; i-- )
+            {
+                xy[0, 0, i] = xy[0, 0, i-1];    //serwer1 x
+                xy[0, 1, i] = xy[0, 1, i-1];    //serwer1 y
+
+                xy[1, 0, i] = xy[1, 0, i - 1];   //serwer2 x
+                xy[1, 1, i] = xy[1, 1, i - 1];  //serwer2 y
+
+                xy[2, 0, i] = xy[2, 0, i - 1];   //serwer3 x
+                xy[2, 1, i] = xy[2, 1, i - 1];  //serwer3 y
+            }
+            if (!(odebrane_dane1[0] == null))
+            {
+                xy[0, 0, 0] = Int32.Parse(odebrane_dane1[0]);   //serwer1 x0
+                xy[0, 1, 0] = Int32.Parse(odebrane_dane1[1]);   //serwer1 y0
+            }
+            if (!(odebrane_dane2[0] == null))
+            {
+                xy[1, 0, 0] = Int32.Parse(odebrane_dane2[0]);   //serwer2 x0
+                xy[1, 1, 0] = Int32.Parse(odebrane_dane2[1]);   //serwer2 y0
+            }
+            if (!(odebrane_dane3[0] == null))
+            {
+                xy[2, 0, 0] = Int32.Parse(odebrane_dane3[0]);   //serwer3 x0
+                xy[2, 1, 0] = Int32.Parse(odebrane_dane3[1]);   //serwer3 y0
+            }
+
+            chart1.Series["serwer1_chart"].Points.Clear();
+            chart1.Series["serwer2_chart"].Points.Clear();
+            chart1.Series["serwer3_chart"].Points.Clear();
+           
+                for (int i = 0; i < 30; i++)
+                {
+                    chart1.Series["serwer1_chart"].Points.AddXY
+                                    (xy[0, 0, i], -xy[0, 1, i]);
+                    chart1.Series["serwer2_chart"].Points.AddXY
+                                    (xy[1, 0, i], -xy[1, 1, i]);
+                    chart1.Series["serwer3_chart"].Points.AddXY
+                                    (xy[2, 0, i], -xy[2, 1, i]);
+                }
+
+                chart1.Series["serwer1_chart"].ChartType =
+                                    SeriesChartType.Spline;
+            chart1.Series["serwer1_chart"].Color = Color.Red;
+
+            chart1.Series["serwer2_chart"].ChartType =
+                                SeriesChartType.Spline;
+            chart1.Series["serwer2_chart"].Color = Color.Green;
+
+            chart1.Series["serwer3_chart"].ChartType =
+                                SeriesChartType.Spline;
+            chart1.Series["serwer3_chart"].Color = Color.Blue;
+
+            chart1.ChartAreas[0].AxisY.Minimum = -(1080);
+            chart1.ChartAreas[0].AxisY.Maximum = 0;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Maximum = 1920;
+
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
 
 
